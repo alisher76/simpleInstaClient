@@ -21,7 +21,8 @@ class ExploreCollectionViewController: UICollectionViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-
+        self.navigationItem.titleView = searchBar
+        self.searchBar.delegate = self
         self.collectionView?.backgroundColor = UIColor.white
         
         authInstagram()
@@ -128,4 +129,18 @@ class ExploreCollectionViewController: UICollectionViewController {
         task.resume()
     }
 
+}
+
+
+extension ExploreCollectionViewController: UISearchBarDelegate {
+
+    func searchBarSearchButtonClicked(_ searchBar: UISearchBar) {
+        if (searchBar.text?.isEmpty)! {
+            searchBar.text = "motivation"
+        }else{
+        searchBar.resignFirstResponder()
+        fetchPhotos()
+        }
+    }
+    
 }
